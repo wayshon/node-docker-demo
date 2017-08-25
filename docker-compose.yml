@@ -1,0 +1,28 @@
+#before this
+#docker cp node1 nodedockerdemo_node1_1:/opt/app
+#docker cp node2 nodedockerdemo_node2_1:/opt/app
+version: '3.1'
+
+services:
+
+  node1:
+    restart: always
+    image: node:8
+    command: node /opt/app/node1/bin/www
+    ports:
+      - "3001:6001"
+    volumes:
+      - /docker/opt/app/node1:/opt/app/node1
+    environment:
+      - NODE_ENV=development
+
+  node2:
+    restart: always
+    image: node:8
+    command: node /opt/app/node2/bin/www
+    ports:
+      - "3002:6002"
+    volumes:
+      - /docker/opt/app/node2:/opt/app/node2
+    environment:
+      - NODE_ENV=development
